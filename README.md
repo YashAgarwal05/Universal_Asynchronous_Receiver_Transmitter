@@ -1,5 +1,5 @@
 # Universal Asynchronous Reciever Transmitter
-# UART Implementation on FPGA (Verilog)
+## UART Implementation on FPGA (Verilog)
 
 This project implements a UART (Universal Asynchronous Receiver Transmitter) on an FPGA using Verilog.  
 The design is tested using Tera Term at 9600 baud, where data sent from a PC keyboard is received by the FPGA, stored internally, and then transmitted back to the PC.

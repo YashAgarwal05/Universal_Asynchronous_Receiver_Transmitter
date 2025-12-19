@@ -1,6 +1,5 @@
 # Universal Asynchronous Reciever Transmitter
 ## UART Implementation on FPGA (Verilog)
-
 This project implements a UART (Universal Asynchronous Receiver Transmitter) on an FPGA using Verilog.  
 The design is tested using Tera Term at 9600 baud, where data sent from a PC keyboard is received by the FPGA, stored internally, and then transmitted back to the PC.
 
@@ -41,8 +40,8 @@ The receiver interprets the incoming data using the same structure.
 The complete UART system is implemented using the following modules:
 
 - Baud Rate Generator
-- UART Receiver
 - UART Transmitter
+- UART Receiver
 - Top-Level Integration Module
 
 The design operates as a receive–store–transmit system, where data received from the PC is first stored inside the FPGA and then transmitted back to the PC.
@@ -52,6 +51,19 @@ The design operates as a receive–store–transmit system, where data received 
 The baud rate generator produces a timing pulse derived from the system clock. This pulse defines the precise timing required for UART transmission and reception.
 
 Both the transmitter and receiver use this baud timing signal to ensure accurate bit sampling and data transfer at 9600 baud.
+
+## UART Transmitter Module
+
+The UART transmitter sends data from the FPGA to the PC.
+
+### Transmitter Operation
+
+- Waits for valid data to be available for transmission
+- Initiates transmission by sending a start bit
+- Transmits data serially LSB first
+- Uses an internal counter to track transmitted bits
+- Sends a stop bit after all data bits are transmitted
+- Asserts a transmission-complete signal and returns to the idle state
 
 ## UART Receiver Module
 
@@ -78,19 +90,6 @@ After a complete byte is received:
 
 This mechanism ensures that transmission begins only after reception is fully complete.
 
-## UART Transmitter Module
-
-The UART transmitter sends the stored data back to the PC.
-
-### Transmitter Operation
-
-- Waits for the reception completion flag
-- Initiates transmission by sending a start bit
-- Transmits stored data LSB first
-- Uses an internal counter to track transmitted bits
-- Sends a stop bit after all data bits are transmitted
-- Asserts a transmission-complete signal and returns to the idle state
-
 ## Overall System Operation
 
 - A key is pressed on the PC keyboard.
@@ -107,5 +106,4 @@ This loopback-style testing validates both UART reception and transmission on FP
 This project demonstrates a complete UART implementation on FPGA using Verilog. The design correctly handles asynchronous serial communication, including baud rate timing, start and stop bit handling, and LSB-first data transfer.
 
 The modular architecture and real hardware testing make this project suitable for learning, debugging, and integration into larger digital systems.
-
-<img width="1916" height="1010" alt="Screenshot 2025-12-17 155045" src="https://github.com/user-attachments/assets/c41aef3f-01ee-47db-9fee-e8be81d282a4" />
+ src="https://github.com/user-attachments/assets/c41aef3f-01ee-47db-9fee-e8be81d282a4" />
